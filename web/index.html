@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAMA Floor Copilot</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#c9d1d9; --ok:#3fb950; --bad:#f85149; --acc:#58a6ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.5 system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); }
+  header { padding:18px 22px; border-bottom:1px solid var(--line); }
+  h1 { margin:0; font-size:19px; } h1 span { color:var(--acc); }
+  main { max-width:980px; margin:0 auto; padding:22px; display:grid; gap:16px; }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  h2 { margin:0 0 10px; font-size:15px; }
+  input[type=file] { color:var(--txt); }
+  button { background:var(--acc); color:#0d1117; border:0; border-radius:6px; padding:8px 14px; font-weight:600; cursor:pointer; }
+  pre { background:#0b0f14; border:1px solid var(--line); border-radius:8px; padding:12px; overflow:auto; max-height:420px; }
+  .v { font-weight:700; } .ok { color:var(--ok); } .bad { color:var(--bad); }
+</style>
+</head>
+<body>
+<header><h1>GAMA <span>Floor Copilot</span> — evidence-gated industrial copilot</h1></header>
+<main>
+  <section>
+    <h2>1 · Ulaz robe (faktura) — invoice intake</h2>
+    <input id="inv" type="file" accept="image/*,application/pdf">
+    <button onclick="send('inv','/api/invoice')">Obradi fakturu</button>
+  </section>
+  <section>
+    <h2>2 · Inspekcija dijela — SAM 3.1</h2>
+    <input id="part" type="file" accept="image/*">
+    <button onclick="send('part','/api/inspect')">Inspekcija</button>
+  </section>
+  <section>
+    <h2>Rezultat + dokaz</h2>
+    <div id="verdict"></div>
+    <pre id="out">—</pre>
+  </section>
+</main>
+<script>
+async function send(inputId, url) {
+  const f = document.getElementById(inputId).files[0];
+  if (!f) { alert('Odaberi fajl'); return; }
+  const fd = new FormData(); fd.append('file', f);
+  document.getElementById('out').textContent = 'Radim…';
+  document.getElementById('verdict').textContent = '';
+  const r = await fetch(url, { method:'POST', body:fd });
+  const j = await r.json();
+  document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+  const v = j.verdict || 'unverified';
+  document.getElementById('verdict').innerHTML =
+    'Verdikt: <span class="v ' + (v==='verified'?'ok':'bad') + '">' + v + '</span>' +
+    (j.evidence_id ? ' · evidence #' + j.evidence_id : '');
+}
+</script>
+</body>
+</html>
