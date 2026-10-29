@@ -12,8 +12,11 @@ META_BASE = os.getenv("META_BASE_URL", "https://api.meta.ai")
 META_MUSE = os.getenv("META_MODEL_MUSE", "")
 META_SAM = os.getenv("META_MODEL_SAM", "")
 
-LOCAL_URL = os.getenv("LOCAL_VISION_URL", "http://127.0.0.1:8100/v1")
-LOCAL_MODEL = os.getenv("LOCAL_CHAT_MODEL", "Qwen/Qwen2.5-7B-Instruct-AWQ")
+LOCAL_URL = os.getenv("LOCAL_VISION_URL", "http://127.0.0.1:11434/v1")
+LOCAL_VISION_MODEL = os.getenv("LOCAL_VISION_MODEL", "qwen2.5vl:7b")
+LOCAL_CHAT_URL = os.getenv("LOCAL_CHAT_URL", LOCAL_URL)
+LOCAL_CHAT_MODEL = os.getenv("LOCAL_CHAT_MODEL", "qwen2.5:3b")
+HTTP_TIMEOUT = float(os.getenv("VISION_TIMEOUT_S", "180"))
 
 
 def available() -> bool:
@@ -46,15 +49,24 @@ def vision(image: bytes, prompt: str, *, json_mode: bool = False) -> dict[str, A
         r.raise_for_status()
         return {"via": "meta", "model": META_MUSE, "raw": r.json()}
 
-    # local fallback (same contract)
+    # local fallback (same contract, OpenAI-compatible vision endpoint)
     body = {
-        "model": LOCAL_MODEL,
-        "messages": [{"role": "user", "content": prompt}],
+        "model": LOCAL_VISION_MODEL,
+        "messages": [{
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+                {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{_b64(image)}"}},
+            ],
+        }],
         "temperature": 0,
+        "stream": False,
     }
-    r = httpx.post(f"{LOCAL_URL}/chat/completions", json=body, timeout=120)
+    if json_mode:
+        body["response_format"] = {"type": "json_object"}
+    r = httpx.post(f"{LOCAL_URL}/chat/completions", json=body, timeout=HTTP_TIMEOUT)
     r.raise_for_status()
-    return {"via": "local", "model": LOCAL_MODEL, "raw": r.json()}
+    return {"via": "local", "model": LOCAL_VISION_MODEL, "raw": r.json()}
 
 
 def segment(image: bytes, prompt: str = "part") -> dict[str, Any]:
@@ -81,8 +93,8 @@ def chat(messages: list[dict[str, str]], *, json_mode: bool = False) -> dict[str
                        json=body, timeout=120)
         r.raise_for_status()
         return {"via": "meta", "model": META_MUSE, "raw": r.json()}
-    r = httpx.post(f"{LOCAL_URL}/chat/completions",
-                   json={"model": LOCAL_MODEL, "messages": messages, "temperature": 0},
-                   timeout=120)
+    r = httpx.post(f"{LOCAL_CHAT_URL}/chat/completions",
+                   json={"model": LOCAL_CHAT_MODEL, "messages": messages, "temperature": 0},
+                   timeout=HTTP_TIMEOUT)
     r.raise_for_status()
-    return {"via": "local", "model": LOCAL_MODEL, "raw": r.json()}
+    return {"via": "local", "model": LOCAL_CHAT_MODEL, "raw": r.json()}

@@ -3,11 +3,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
 from pathlib import Path
 from typing import Any
 
-DB = Path("db/evidence.sqlite3")
+DB = Path(os.getenv("EVIDENCE_DB", "db/evidence.sqlite3"))
 
 
 def _conn() -> sqlite3.Connection:

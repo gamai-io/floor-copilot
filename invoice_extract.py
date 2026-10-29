@@ -27,11 +27,26 @@ def _d(v: Any) -> Decimal | None:
         return None
 
 
+def _parse_json(text: str) -> dict[str, Any]:
+    text = (text or "").strip()
+    if text.startswith("```"):
+        text = text.strip("`")
+        if text.lower().startswith("json"):
+            text = text[4:].lstrip()
+    try:
+        return json.loads(text)
+    except Exception:
+        start, end = text.find("{"), text.rfind("}")
+        if start >= 0 and end > start:
+            return json.loads(text[start:end + 1])
+        raise
+
+
 def extract(image: bytes) -> dict[str, Any]:
     res = meta_adapter.vision(image, SCHEMA_PROMPT, json_mode=True)
     try:
         text = res["raw"]["choices"][0]["message"]["content"]
-        data = json.loads(text)
+        data = _parse_json(text)
     except Exception:
         data = {"error": "parse_failed", "raw": res.get("raw")}
 
@@ -66,6 +81,19 @@ def extract(image: bytes) -> dict[str, Any]:
     total_expect = (base + vat_expect).quantize(Q, rounding=ROUND_HALF_UP)
     if total is not None and total != total_expect:
         problems.append(f"total {total} != {total_expect}")
+
+    computed_totals = False
+    if net is None:
+        data["net_total"] = float(base)
+        computed_totals = True
+    if vat is None:
+        data["vat"] = float(vat_expect)
+        computed_totals = True
+    if total is None:
+        data["total"] = float(total_expect)
+        computed_totals = True
+    if computed_totals:
+        data["computed_totals"] = True
 
     verdict = "verified" if not problems else "unverified"
     eid = evidence.add("invoice", image, {"extracted": data, "problems": problems,

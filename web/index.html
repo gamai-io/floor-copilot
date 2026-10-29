@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GAMA Floor Copilot</title>
+<title>gamAI Floor Copilot</title>
 <style>
   :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#c9d1d9; --ok:#3fb950; --bad:#f85149; --acc:#58a6ff; }
   * { box-sizing:border-box; }
@@ -20,11 +20,11 @@
 </style>
 </head>
 <body>
-<header><h1>GAMA <span>Floor Copilot</span> — evidence-gated industrial copilot</h1></header>
+<header><h1>gamAI <span>Floor Copilot</span> — evidence-gated industrial copilot</h1></header>
 <main>
   <section>
     <h2>1 · Ulaz robe (faktura) — invoice intake</h2>
-    <input id="inv" type="file" accept="image/*,application/pdf">
+    <input id="inv" type="file" accept="image/*">
     <button onclick="send('inv','/api/invoice')">Obradi fakturu</button>
   </section>
   <section>
@@ -50,8 +50,9 @@ async function send(inputId, url) {
   document.getElementById('out').textContent = JSON.stringify(j, null, 2);
   const v = j.verdict || 'unverified';
   document.getElementById('verdict').innerHTML =
-    'Verdikt: <span class="v ' + (v==='verified'?'ok':'bad') + '">' + v + '</span>' +
-    (j.evidence_id ? ' · evidence #' + j.evidence_id : '');
+    (j.ok === false ? '<span class="v bad">greška: ' + (j.error || 'request failed') + '</span>' :
+      'Verdikt: <span class="v ' + (v==='verified'?'ok':'bad') + '">' + v + '</span>' +
+      (j.evidence_id ? ' · <a class="ok" href="/api/evidence/' + j.evidence_id + '" target="_blank">evidence #' + j.evidence_id + '</a>' : ''));
 }
 </script>
 </body>

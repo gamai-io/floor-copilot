@@ -1,106 +1,150 @@
-# GAMA Floor Copilot
+# Floor Copilot
 
-**Industrial floor copilot built on Meta Model API (Muse + SAM 3.1) — every answer carries evidence.**
+**An evidence-gated intake copilot for small industrial distributors.**
 
-Meta Global AI Developer Hackathon 2026 · Track: **Startup** · Team: GAMA TRADE d.o.o. (product: gamAI)
+Meta Global AI Developer Hackathon 2026 · Track: **Startup** · Theme: **Build for Your World**
+Team: gamAI
 
-## Problem
+## The problem
 
-Small industrial distributors and service shops still run on paper and spreadsheets:
+A small distributor types supplier invoices by hand: 5–7 minutes each, and a wrong
+quantity or price propagates into stock and margin. A generic chatbot makes this worse,
+because a confident wrong number is indistinguishable from a right one.
 
-- supplier invoices are typed in by hand (hours per week, errors in quantities/prices),
-- incoming parts are inspected by eye, with no photo record or measurement,
-- operators ask "what is the price / do we have it in stock / what does this document say" and get no reliable answer.
+Floor Copilot takes a photo of the invoice, extracts line items, recomputes the
+arithmetic with 17% VAT, and **refuses to mark the result verified when the numbers do
+not reconcile**. Every result carries a SHA-256 of the image and a stored evidence record.
 
-Generic chatbots are not usable here: a wrong number in an invoice or a stock answer costs real money, so **an answer without evidence is worse than no answer**.
+## What works today (measured, not projected)
 
-## What we built
+Invoice photo → structured JSON → arithmetic gate → evidence record.
 
-A local-first copilot with three flows, each gated by an evidence check:
+Real run on the included synthetic sample (`samples/faktura-mock.png`), local vision
+model `qwen3-vl:8b` on an RTX 8000, **21.1 s** end to end:
 
-1. **Invoice intake (vision)** — photo/PDF of a supplier invoice → Muse vision → structured JSON (supplier, line items, quantity, unit price) → arithmetic re-check + 17% VAT → **evidence**: image hash, page, bounding box per field.
-2. **Part inspection (SAM 3.1)** — photo of a part/equipment → segmentation masks → damaged areas highlighted → report with masks, area in pixels/cm² and confidence.
-3. **Operator Q&A (Muse, bs/en/de)** — "price and stock of X", "what does this document say" — answers cite the source row/document; confidential data never leaves the local network.
+```json
+{
+  "supplier": "MOC K DOBAVLJAC DOO",
+  "invoice_no": "MOCK-001",
+  "date": "2026-10-20",
+  "items": [{"name": "Rukavice 600mm", "qty": 4, "unit_price": 12.5, "line_total": 50.0}],
+  "net_total": 50.0, "vat": 8.5, "total": 58.5,
+  "computed_totals": true,
+  "evidence_id": 2,
+  "verdict": "verified",
+  "problems": []
+}
+```
+
+Honest note: the supplier name was transcribed as `MOC K DOBAVLJAC DOO` (the print is
+`MOCK DOBAVLJAC DOO`). The gate verifies arithmetic, not name transcription. Field-level
+OCR confidence is the next step, not a claim we make now.
+
+The seven unit tests run without a model or network:
+
+```bash
+python3 -m unittest discover -s tests -v   # 7/7
+```
+
+They cover: verified invoice, line-total mismatch → `unverified`, missing totals →
+computed, fenced JSON, unparseable output → fail closed, inspection with/without masks.
 
 ## Evidence gate
 
-Every automated result is accepted only if it can be verified:
-
-| Flow | Check | Fail behaviour |
+| Flow | Check | On failure |
 |---|---|---|
-| Invoice | sum(items) == total, VAT == 17%, fields non-empty | mark `unverified`, list missing fields |
-| Inspection | mask area > 0, image hash stored | return original photo + "no damage detected" |
-| Q&A | answer cites a source row/document id | answer "no evidence found" instead of guessing |
+| Invoice | each `qty × unit_price == line_total`; `net == Σ lines`; `vat == 17%`; `total == net + vat` | `unverified` + exact problem list |
+| Missing totals | recompute from lines | fill fields, set `computed_totals: true` |
+| Part inspection | segmentation masks present | `unverified`; never invent damage |
 
-This is the part hackathon demos usually skip: the copilot **fails closed**.
+`/api/evidence/{id}` returns the stored record: image SHA-256, source (`meta`/`local`),
+extracted payload, problems and verdict.
+
+## Part inspection — partial
+
+`/api/inspect` calls the Meta segmentation adapter when `META_API_KEY` and
+`META_MODEL_SAM` are set. Without SAM it returns **`unverified` with 0 masks** rather
+than a fabricated result. The local fallback does not pretend to segment. This is
+deliberate: inspection is the flow where a false positive is expensive.
+
+## Run
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env          # point LOCAL_VISION_URL at Ollama/vLLM
+uvicorn app:app --host 127.0.0.1 --port 8017
+```
+
+Open `http://127.0.0.1:8017`, upload a photo, read the verdict and the evidence link.
+
+Local vision (OpenAI-compatible endpoint):
+
+```bash
+LOCAL_VISION_URL=http://127.0.0.1:11434/v1
+LOCAL_VISION_MODEL=qwen3-vl:8b     # or qwen2.5vl:7b
+LOCAL_CHAT_MODEL=qwen2.5:3b
+```
+
+Meta adapter (ids and base URL are supplied at kickoff; defaults below are placeholders
+until confirmed):
+
+```bash
+META_API_KEY=...
+META_BASE_URL=https://api.meta.ai
+META_MODEL_MUSE=...
+META_MODEL_SAM=...
+```
 
 ## Architecture
 
 ```
-            ┌─────────────────────────────┐
-  photo/PDF │  web UI (single page)       │
-  ─────────►│  upload → result → evidence │
-            └──────────────┬──────────────┘
-                           │
-                 ┌─────────▼──────────┐
-                 │  agent loop        │  plan → tool → verify → answer
-                 │  (tool calling)    │
-                 └─────────┬──────────┘
-        ┌──────────────────┼───────────────────┐
-        │                  │                   │
-┌───────▼──────┐  ┌────────▼───────┐  ┌────────▼───────┐
-│ meta_adapter │  │ invoice_extract│  │ inspect_part    │
-│ Muse / SAM   │  │ schema + VAT   │  │ SAM 3.1 masks   │
-└───────┬──────┘  └────────┬───────┘  └────────┬────────┘
-        │                  │                   │
-        └──────────────────┼───────────────────┘
-                           │
-                 ┌─────────▼──────────┐
-                 │ evidence store     │  hash + bbox + source
-                 └────────────────────┘
+photo ─► FastAPI ─► meta_adapter.vision ─► invoice_extract
+                         │                      │
+                         │                      ├─ Decimal arithmetic + 17% VAT
+                         │                      └─ evidence.add(hash, payload, verdict)
+                         └─ Meta Muse / local qwen-vl
+                                               │
+                        GET /api/evidence/{id} ┘
 ```
 
-Fallback: if the Meta API key is unavailable, the same adapter interface talks to local models (Ollama / vLLM), so the demo works offline too.
+## API
 
-## Stack
+| endpoint | purpose |
+|---|---|
+| `GET /` | single-page UI |
+| `GET /health` | adapter configuration (no secrets) |
+| `POST /api/invoice` | multipart image → extraction + verdict |
+| `POST /api/inspect` | multipart image → masks (SAM) or fail closed |
+| `GET /api/evidence/{id}` | stored evidence record |
 
-- **Meta Model API** — Muse (vision + chat, multilingual bs/en/de), SAM 3.1 (segmentation)
-- Python 3.11+, FastAPI (or plain HTTP), minimal HTML/JS UI
-- SQLite for the evidence store (demo), pluggable to Postgres
-- Partner credits used: Baseten, Modal, Fireworks (as applicable)
+Upload cap is 10 MB. Model/network errors return 502, never a fake `verified`.
 
-## Run (local)
+## Not implemented (so we do not claim it)
 
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env          # add META_API_KEY
-uvicorn app:app --reload      # http://127.0.0.1:8000
-```
+- Operator Q&A over stock/prices — designed, not built.
+- PDF input — photos only.
+- Field-level bounding boxes / OCR confidence.
+- Auth, multi-tenant storage, production rate limits.
 
 ## Repo layout
 
 ```
-app.py               # HTTP API + upload endpoints
-meta_adapter.py      # Meta Model API client (vision, chat, segmentation) + local fallback
-invoice_extract.py   # invoice → JSON, arithmetic + VAT validation, evidence
-inspect_part.py      # SAM 3.1 masks, damage report
-evidence.py          # evidence store (hash, bbox, source, verdict)
-web/index.html       # single-page UI: upload → result → evidence
-samples/             # anonymised sample documents/images
+app.py               FastAPI + upload endpoints
+meta_adapter.py      Meta Muse/SAM client + local vision fallback
+invoice_extract.py   schema, Decimal math, VAT, evidence
+inspect_part.py      SAM masks → report (fail closed)
+evidence.py          SQLite evidence store
+web/index.html       single page UI
+samples/             synthetic invoice and part images
+tests/               evidence-gate tests (no model)
 ```
 
-## Results (to be filled during the hackathon)
+## Privacy
 
-| Metric | Before | GAMA Floor Copilot |
-|---|---|---|
-| invoice entry time | ~6 min / invoice | target < 30 s |
-| field accuracy | — | target ≥ 95% on samples |
-| stock/price answer | manual lookup | < 2 s with cited source |
-
-## Privacy / sanitisation
-
-The public repo and demo contain **no** customer names, internal hosts, credentials or proprietary data. All samples are anonymised or synthetic.
+The public repo and samples contain no customer names, internal hosts, credentials or
+proprietary data. Samples are synthetic. The app runs on your own network; when a local
+vision endpoint is configured, invoice images do not leave it.
 
 ## License
 
