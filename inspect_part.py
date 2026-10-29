@@ -22,5 +22,6 @@ def inspect(image: bytes) -> dict[str, Any]:
     except Exception:
         text = "no evidence"
     verdict = "verified" if masks else "unverified"
-    eid = evidence.add("inspection", image, {"masks": masks, "report": text}, verdict, source=seg["via"])
-    return {"evidence_id": eid, "verdict": verdict, "masks": len(masks), "report": text, "via": seg["via"]}
+    ev = evidence.add("inspection", image, {"masks": masks, "report": text}, verdict, source=seg["via"])
+    return {"evidence_id": ev["id"], "evidence_key": ev["token"], "verdict": verdict,
+            "masks": len(masks), "report": text, "via": seg["via"]}

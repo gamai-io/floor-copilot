@@ -52,7 +52,7 @@ async function send(inputId, url) {
   document.getElementById('verdict').innerHTML =
     (j.ok === false ? '<span class="v bad">greška: ' + (j.error || 'request failed') + '</span>' :
       'Verdikt: <span class="v ' + (v==='verified'?'ok':'bad') + '">' + v + '</span>' +
-      (j.evidence_id ? ' · <a class="ok" href="/api/evidence/' + j.evidence_id + '" target="_blank">evidence #' + j.evidence_id + '</a>' : ''));
+      (j.evidence_id ? ' · <a class="ok" href="/api/evidence/' + j.evidence_id + '?k=' + encodeURIComponent(j.evidence_key || '') + '" target="_blank">evidence #' + j.evidence_id + '</a>' : ''));
 }
 </script>
 </body>

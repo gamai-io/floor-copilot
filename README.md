@@ -17,6 +17,8 @@ not reconcile**. Every result carries a SHA-256 of the image and a stored eviden
 
 ## What works today (measured, not projected)
 
+**Live demo:** https://gamai.io
+
 Invoice photo → structured JSON → arithmetic gate → evidence record.
 
 Real run on the included synthetic sample (`samples/faktura-mock.png`), local vision
@@ -57,8 +59,9 @@ computed, fenced JSON, unparseable output → fail closed, inspection with/witho
 | Missing totals | recompute from lines | fill fields, set `computed_totals: true` |
 | Part inspection | segmentation masks present | `unverified`; never invent damage |
 
-`/api/evidence/{id}` returns the stored record: image SHA-256, source (`meta`/`local`),
-extracted payload, problems and verdict.
+`/api/evidence/{id}?k=...` returns the stored record: image SHA-256, source (`meta`/`local`),
+extracted payload, problems and verdict. The `k` token is returned by the extraction call;
+without it the endpoint returns 404, so evidence IDs cannot be enumerated.
 
 ## Part inspection — partial
 

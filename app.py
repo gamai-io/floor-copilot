@@ -32,8 +32,8 @@ def health() -> dict:
 
 
 @app.get("/api/evidence/{item_id}")
-def api_evidence(item_id: int) -> JSONResponse:
-    row = evidence.get(item_id)
+def api_evidence(item_id: int, k: str = "") -> JSONResponse:
+    row = evidence.get(item_id, k)
     if not row:
         return JSONResponse({"ok": False, "error": "not found"}, status_code=404)
     return JSONResponse(row)

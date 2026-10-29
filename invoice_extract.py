@@ -96,11 +96,12 @@ def extract(image: bytes) -> dict[str, Any]:
         data["computed_totals"] = True
 
     verdict = "verified" if not problems else "unverified"
-    eid = evidence.add("invoice", image, {"extracted": data, "problems": problems,
+    ev = evidence.add("invoice", image, {"extracted": data, "problems": problems,
                                          "computed": {"net": str(base), "vat": str(vat_expect),
                                                       "total": str(total_expect)}},
                        verdict, source=res["via"])
-    data["evidence_id"] = eid
+    data["evidence_id"] = ev["id"]
+    data["evidence_key"] = ev["token"]
     data["verdict"] = verdict
     data["problems"] = problems
     return data

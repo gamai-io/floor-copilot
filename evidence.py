@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import secrets
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -22,9 +23,13 @@ def _conn() -> sqlite3.Connection:
             sha256 TEXT NOT NULL,
             source TEXT,
             payload TEXT,
-            verdict TEXT NOT NULL
+            verdict TEXT NOT NULL,
+            token TEXT
         )"""
     )
+    cols = {row[1] for row in c.execute("PRAGMA table_info(evidence)")}
+    if "token" not in cols:
+        c.execute("ALTER TABLE evidence ADD COLUMN token TEXT")
     c.commit()
     return c
 
@@ -33,24 +38,30 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def add(kind: str, data: bytes, payload: dict[str, Any], verdict: str, source: str = "") -> int:
-    """Store evidence. `verdict` is 'verified' or 'unverified' (fail closed)."""
+def add(kind: str, data: bytes, payload: dict[str, Any], verdict: str,
+        source: str = "") -> dict[str, Any]:
+    """Store evidence and return a public id plus an unguessable access token.
+
+    `verdict` is 'verified' or 'unverified' (fail closed). The token prevents
+    enumeration of other users' uploads through /api/evidence/{id}.
+    """
+    token = secrets.token_urlsafe(12)
     c = _conn()
     cur = c.execute(
-        "INSERT INTO evidence(kind, sha256, source, payload, verdict) VALUES (?,?,?,?,?)",
-        (kind, sha256_bytes(data), source, json.dumps(payload, ensure_ascii=False), verdict),
+        "INSERT INTO evidence(kind, sha256, source, payload, verdict, token) VALUES (?,?,?,?,?,?)",
+        (kind, sha256_bytes(data), source, json.dumps(payload, ensure_ascii=False), verdict, token),
     )
     c.commit()
-    return int(cur.lastrowid)
+    return {"id": int(cur.lastrowid), "token": token}
 
 
-def get(item_id: int) -> dict[str, Any] | None:
+def get(item_id: int, token: str = "") -> dict[str, Any] | None:
     c = _conn()
     row = c.execute(
-        "SELECT id, created, kind, sha256, source, payload, verdict FROM evidence WHERE id=?",
+        "SELECT id, created, kind, sha256, source, payload, verdict, token FROM evidence WHERE id=?",
         (item_id,),
     ).fetchone()
-    if not row:
+    if not row or not row[7] or not secrets.compare_digest(str(row[7]), str(token)):
         return None
     return {
         "id": row[0],

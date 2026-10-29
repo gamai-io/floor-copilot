@@ -47,10 +47,11 @@ class FlowTests(unittest.TestCase):
             out = invoice_extract.extract(b"image-bytes")
         self.assertEqual(out["verdict"], "verified", out)
         self.assertEqual(out["problems"], [])
-        row = evidence.get(out["evidence_id"])
+        row = evidence.get(out["evidence_id"], out["evidence_key"])
         self.assertEqual(row["kind"], "invoice")
         self.assertEqual(row["verdict"], "verified")
         self.assertEqual(row["sha256"], evidence.sha256_bytes(b"image-bytes"))
+        self.assertIsNone(evidence.get(out["evidence_id"], "wrong-token"))
 
     def test_line_total_mismatch_fails_closed(self) -> None:
         bad = json.loads(json.dumps(VALID))
