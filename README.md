@@ -1,3 +1,5 @@
+[![CI](https://github.com/gamai-io/floor-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/gamai-io/floor-copilot/actions/workflows/ci.yml)
+
 # Floor Copilot
 
 **An evidence-gated intake copilot for small industrial distributors.**
