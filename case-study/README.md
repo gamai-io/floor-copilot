@@ -58,6 +58,6 @@ No customer data leaves the local environment; only aggregated, anonymized resul
 
 Synthetic documents, not real customer invoices. Run: `python case-study/realistic/run_tesseract_case_study.py`.
 
-## Real invoice pilot (private data)
+## Real invoice pilot (private)
 
-[`real/RESULTS_REAL.md`](real/RESULTS_REAL.md) — 34 unique real GAMA/available invoices, Tesseract OCR + gate: 19 verified, 15 fail-closed, **0 false verifications**, 21/23 OCR totals match the text-layer reference. Source files stay private.
+Executed locally; results and source files are private. See `real/README.md` for the public methodology only.
