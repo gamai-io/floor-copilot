@@ -156,3 +156,15 @@ vision endpoint is configured, invoice images do not leave it.
 ## License
 
 MIT — see `LICENSE`.
+
+## Production hardening
+
+- `/api/invoice` and `/api/inspect` accept an optional `X-API-Key` gate. Set
+  `FLOOR_API_KEY` in the deployment to require it (the public demo can stay open only
+  while it is intentionally unset).
+- Uploads are read in 1 MiB chunks and rejected as soon as they cross the 10 MiB limit,
+  so an oversized body is never buffered whole before the check.
+- Error responses return only the exception class. Set `FLOOR_DEBUG=1` to include a
+  300-character detail while debugging; production should leave it unset.
+- `/api/evidence/{id}` still requires the per-record token (`?k=`), so evidence IDs cannot
+  be enumerated.
