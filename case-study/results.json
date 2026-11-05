@@ -1,0 +1,727 @@
+{
+  "generated": "2026-11-05",
+  "seed": 42,
+  "method": "synthetic OCR payloads through the real invoice_extract arithmetic gate",
+  "caveat": "Synthetic, not real invoices. Measures arithmetic gate only; OCR field confidence is not modeled.",
+  "metrics": {
+    "valid_verified": 40,
+    "valid_total": 40,
+    "arithmetic_unverified": 30,
+    "arithmetic_false_verified": 0,
+    "arithmetic_total": 30,
+    "missing_totals_verified": 10,
+    "missing_totals_total": 10,
+    "ocr_name_verified": 10,
+    "ocr_name_total": 10,
+    "invalid_unverified": 10,
+    "invalid_total": 10,
+    "elapsed_s": 0.291,
+    "cases": 100
+  },
+  "cases": [
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "valid",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: line_total 3061.35 != 3060.35",
+        "net_total 8514.03 != sum(lines) 8515.03"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "net_total 11217.43 != sum(lines) 11216.43",
+        "vat 1906.79 != 17% of 11217.43 (1906.96)",
+        "total 13123.22 != 13124.39"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "vat 988.13 != 17% of 5806.64 (987.13)"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "total 5415.88 != 5414.88"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: missing qty/unit_price",
+        "net_total 8346.49 != sum(lines) 3929.45"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: line_total 1639.12 != 1638.12",
+        "net_total 1638.12 != sum(lines) 1639.12"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "net_total 10492.95 != sum(lines) 10491.95",
+        "vat 1783.63 != 17% of 10492.95 (1783.80)",
+        "total 12275.58 != 12276.75"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "vat 2984.97 != 17% of 17552.79 (2983.97)"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "total 3305.98 != 3304.98"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: missing qty/unit_price",
+        "net_total 3496.69 != sum(lines) 2426.53"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: line_total 4104.60 != 4103.60",
+        "net_total 6594.68 != sum(lines) 6595.68"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "net_total 1759.95 != sum(lines) 1758.95",
+        "vat 299.02 != 17% of 1759.95 (299.19)",
+        "total 2057.97 != 2059.14"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "vat 714.26 != 17% of 4195.66 (713.26)"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "total 11645.25 != 11644.25"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: missing qty/unit_price",
+        "net_total 10062.23 != sum(lines) 9541.83"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: line_total 3983.32 != 3982.32",
+        "net_total 13022.80 != sum(lines) 13023.80"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "net_total 8930.10 != sum(lines) 8929.10",
+        "vat 1517.95 != 17% of 8930.10 (1518.12)",
+        "total 10447.05 != 10448.22"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "vat 3151.88 != 17% of 18534.61 (3150.88)"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "total 3019.25 != 3018.25"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: missing qty/unit_price",
+        "net_total 2692.48 != sum(lines) 0.00"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: line_total 77.20 != 76.20",
+        "net_total 4012.00 != sum(lines) 4013.00"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "net_total 12214.99 != sum(lines) 12213.99",
+        "vat 2076.38 != 17% of 12214.99 (2076.55)",
+        "total 14290.37 != 14291.54"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "vat 262.35 != 17% of 1537.34 (261.35)"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "total 14249.13 != 14248.13"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: missing qty/unit_price",
+        "net_total 17060.79 != sum(lines) 13215.00"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: line_total 5017.96 != 5016.96",
+        "net_total 11051.25 != sum(lines) 11052.25"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "net_total 5121.46 != sum(lines) 5120.46",
+        "vat 870.48 != 17% of 5121.46 (870.65)",
+        "total 5990.94 != 5992.11"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "vat 1214.19 != 17% of 7136.40 (1213.19)"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "total 4458.70 != 4457.70"
+      ]
+    },
+    {
+      "label": "arithmetic_error",
+      "verdict": "unverified",
+      "computed_totals": false,
+      "problems": [
+        "item 1: missing qty/unit_price",
+        "net_total 14739.99 != sum(lines) 10971.39"
+      ]
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "missing_totals",
+      "verdict": "verified",
+      "computed_totals": true,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "ocr_name_only",
+      "verdict": "verified",
+      "computed_totals": false,
+      "problems": []
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    },
+    {
+      "label": "invalid_output",
+      "verdict": "unverified",
+      "computed_totals": true,
+      "problems": [
+        "no items"
+      ]
+    }
+  ]
+}

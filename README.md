@@ -168,3 +168,15 @@ MIT — see `LICENSE`.
   300-character detail while debugging; production should leave it unset.
 - `/api/evidence/{id}` still requires the per-record token (`?k=`), so evidence IDs cannot
   be enumerated.
+
+## Case study (synthetic gate benchmark)
+
+[`case-study/RESULTS.md`](case-study/RESULTS.md) runs **100 synthetic OCR payloads** through the real arithmetic gate:
+
+- 40/40 valid invoices verified
+- 30/30 arithmetic errors marked unverified (**0 false verifications**)
+- 10/10 missing totals recomputed
+- 10/10 OCR-name mismatches still verified (**known limitation**)
+- 10/10 unparseable outputs unverified
+
+This is a reproducible regression test, **not** a real-invoice field study. Real invoices require anonymization and a separate OCR evaluation. Run: `python case-study/gate_benchmark.py`.
