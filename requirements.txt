@@ -3,4 +3,4 @@ uvicorn[standard]==0.54.0
 httpx==0.28.1
 python-multipart==0.0.33
 pillow==13.0.0
-numpy==2.5.4
+numpy==2.4.6
