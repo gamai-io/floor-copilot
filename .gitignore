@@ -6,3 +6,5 @@ db/
 out/
 *.sqlite3
 .DS_Store
+
+case-study/real/results_real.json
