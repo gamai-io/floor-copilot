@@ -1,0 +1,424 @@
+[
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-002",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "C-5520",
+          "name": "Vijčani kompresor Comprag 5.5kW",
+          "qty": 5,
+          "unit_price": 1531.48,
+          "line_total": 7657.4
+        }
+      ],
+      "net_total": 7657.4,
+      "vat": 1301.76,
+      "total": 8959.16
+    },
+    "image": "faktura-01-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-003",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 1,
+          "unit_price": 189.37,
+          "line_total": 189.37
+        }
+      ],
+      "net_total": 189.37,
+      "vat": 32.19,
+      "total": 221.56
+    },
+    "image": "faktura-02-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-004",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "BM15",
+          "name": "Crijevo BlueMax 15m 1/2\"",
+          "qty": 5,
+          "unit_price": 997.84,
+          "line_total": 4989.2
+        }
+      ],
+      "net_total": 4989.2,
+      "vat": 848.16,
+      "total": 5837.36
+    },
+    "image": "faktura-03-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-005",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "PG-200",
+          "name": "Pjeskarenje BlastPack 200",
+          "qty": 3,
+          "unit_price": 221.57,
+          "line_total": 664.71
+        }
+      ],
+      "net_total": 664.71,
+      "vat": 113.0,
+      "total": 777.71
+    },
+    "image": "faktura-04-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-006",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "17E669",
+          "name": "Graco Mark X Standard airless",
+          "qty": 3,
+          "unit_price": 1345.55,
+          "line_total": 4036.65
+        },
+        {
+          "code": "C-5520",
+          "name": "Vijčani kompresor Comprag 5.5kW",
+          "qty": 5,
+          "unit_price": 91.05,
+          "line_total": 455.25
+        },
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 4,
+          "unit_price": 1405.69,
+          "line_total": 5622.76
+        }
+      ],
+      "net_total": 10114.66,
+      "vat": 1719.49,
+      "total": 11834.15
+    },
+    "image": "faktura-05-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-007",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "C-5520",
+          "name": "Vijčani kompresor Comprag 5.5kW",
+          "qty": 1,
+          "unit_price": 893.66,
+          "line_total": 893.66
+        },
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 3,
+          "unit_price": 104.81,
+          "line_total": 314.43
+        },
+        {
+          "code": "BM15",
+          "name": "Crijevo BlueMax 15m 1/2\"",
+          "qty": 2,
+          "unit_price": 1206.56,
+          "line_total": 2413.12
+        }
+      ],
+      "net_total": 3621.21,
+      "vat": 615.61,
+      "total": 4236.82
+    },
+    "image": "faktura-06-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-008",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 2,
+          "unit_price": 734.89,
+          "line_total": 1469.78
+        },
+        {
+          "code": "BM15",
+          "name": "Crijevo BlueMax 15m 1/2\"",
+          "qty": 1,
+          "unit_price": 167.49,
+          "line_total": 167.49
+        }
+      ],
+      "net_total": 1637.27,
+      "vat": 278.34,
+      "total": 1915.61
+    },
+    "image": "faktura-07-valid.png"
+  },
+  {
+    "scenario": "valid",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-009",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "BM15",
+          "name": "Crijevo BlueMax 15m 1/2\"",
+          "qty": 3,
+          "unit_price": 1733.64,
+          "line_total": 5200.92
+        }
+      ],
+      "net_total": 5200.92,
+      "vat": 884.16,
+      "total": 6085.08
+    },
+    "image": "faktura-08-valid.png"
+  },
+  {
+    "scenario": "line_total",
+    "expected": "unverified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-010",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "PG-200",
+          "name": "Pjeskarenje BlastPack 200",
+          "qty": 5,
+          "unit_price": 697.03,
+          "line_total": 3486.15
+        },
+        {
+          "code": "17E669",
+          "name": "Graco Mark X Standard airless",
+          "qty": 2,
+          "unit_price": 367.62,
+          "line_total": 735.24
+        }
+      ],
+      "net_total": 4220.39,
+      "vat": 717.47,
+      "total": 4937.86
+    },
+    "image": "faktura-09-line_total.png"
+  },
+  {
+    "scenario": "net_total",
+    "expected": "unverified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-011",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "17E669",
+          "name": "Graco Mark X Standard airless",
+          "qty": 1,
+          "unit_price": 794.84,
+          "line_total": 794.84
+        },
+        {
+          "code": "C-5520",
+          "name": "Vijčani kompresor Comprag 5.5kW",
+          "qty": 5,
+          "unit_price": 66.11,
+          "line_total": 330.55
+        },
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 4,
+          "unit_price": 1471.45,
+          "line_total": 5885.8
+        }
+      ],
+      "net_total": 7012.19,
+      "vat": 1191.9,
+      "total": 8203.09
+    },
+    "image": "faktura-10-net_total.png"
+  },
+  {
+    "scenario": "vat",
+    "expected": "unverified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-012",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "C-5520",
+          "name": "Vijčani kompresor Comprag 5.5kW",
+          "qty": 5,
+          "unit_price": 1548.08,
+          "line_total": 7740.4
+        },
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 4,
+          "unit_price": 835.22,
+          "line_total": 3340.88
+        }
+      ],
+      "net_total": 11081.28,
+      "vat": 1884.82,
+      "total": 12965.1
+    },
+    "image": "faktura-11-vat.png"
+  },
+  {
+    "scenario": "total",
+    "expected": "unverified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-013",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "HDA531",
+          "name": "Mlaznica HDA 531 za glet",
+          "qty": 3,
+          "unit_price": 1197.15,
+          "line_total": 3591.45
+        },
+        {
+          "code": "BM15",
+          "name": "Crijevo BlueMax 15m 1/2\"",
+          "qty": 3,
+          "unit_price": 290.98,
+          "line_total": 872.94
+        }
+      ],
+      "net_total": 4464.39,
+      "vat": 758.95,
+      "total": 5224.34
+    },
+    "image": "faktura-12-total.png"
+  },
+  {
+    "scenario": "missing_totals",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-014",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "BM15",
+          "name": "Crijevo BlueMax 15m 1/2\"",
+          "qty": 3,
+          "unit_price": 1246.05,
+          "line_total": 3738.15
+        },
+        {
+          "code": "PG-200",
+          "name": "Pjeskarenje BlastPack 200",
+          "qty": 2,
+          "unit_price": 1187.54,
+          "line_total": 2375.08
+        }
+      ],
+      "net_total": null,
+      "vat": null,
+      "total": null
+    },
+    "image": "faktura-13-missing_totals.png"
+  },
+  {
+    "scenario": "supplier_typo",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRDE d.o.o.",
+      "invoice_no": "GAMA-2026-015",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "PG-200",
+          "name": "Pjeskarenje BlastPack 200",
+          "qty": 5,
+          "unit_price": 1276.55,
+          "line_total": 6382.75
+        }
+      ],
+      "net_total": 6382.75,
+      "vat": 1085.07,
+      "total": 7467.82
+    },
+    "image": "faktura-14-supplier_typo.png"
+  },
+  {
+    "scenario": "low_quality",
+    "expected": "verified",
+    "data": {
+      "supplier": "GAMA TRADE d.o.o.",
+      "invoice_no": "GAMA-2026-016",
+      "date": "05.11.2026",
+      "currency": "BAM",
+      "items": [
+        {
+          "code": "17E669",
+          "name": "Graco Mark X Standard airless",
+          "qty": 1,
+          "unit_price": 957.52,
+          "line_total": 957.52
+        }
+      ],
+      "net_total": 957.52,
+      "vat": 162.78,
+      "total": 1120.3
+    },
+    "image": "faktura-15-low_quality.png"
+  }
+]

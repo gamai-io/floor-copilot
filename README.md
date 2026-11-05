@@ -180,3 +180,5 @@ MIT — see `LICENSE`.
 - 10/10 unparseable outputs unverified
 
 This is a reproducible regression test, **not** a real-invoice field study. Real invoices require anonymization and a separate OCR evaluation. Run: `python case-study/gate_benchmark.py`.
+
+A second case study runs **real Tesseract OCR** on 15 GAMA-style synthetic invoices: [`case-study/realistic/RESULTS_TESSERACT.md`](case-study/realistic/RESULTS_TESSERACT.md) — 8/8 valid verified, 4/4 arithmetic errors caught, **0 false verifications**, 15/15 invoice numbers exact, 26/26 item lines exact. Still synthetic; real anonymized invoices are the next step.

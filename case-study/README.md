@@ -45,3 +45,15 @@ Run the same gate on 100+ **anonymized real invoices** with ground truth and mea
 - time saved vs manual entry.
 
 No customer data leaves the local environment; only aggregated, anonymized results are published.
+
+## Realistic synthetic invoice OCR (Tesseract)
+
+[`realistic/RESULTS_TESSERACT.md`](realistic/RESULTS_TESSERACT.md) renders **15 GAMA-style synthetic invoices**, runs **real Tesseract OCR**, then the real arithmetic gate:
+
+- 8/8 valid verified
+- 4/4 arithmetic errors caught, **0 false verifications**
+- 1/1 missing totals computed
+- supplier typo still verified (**known gap**)
+- 15/15 invoice numbers exact, 26/26 item lines exact
+
+Synthetic documents, not real customer invoices. Run: `python case-study/realistic/run_tesseract_case_study.py`.
