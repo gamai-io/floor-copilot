@@ -1,4 +1,4 @@
-[![CI](https://github.com/gamai-io/floor-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/gamai-io/floor-copilot/actions/workflows/ci.yml)
+[![CI](https://github.com/renatoschust-dot/floor-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/renatoschust-dot/floor-copilot/actions/workflows/ci.yml)
 
 > **Live evidence dashboard:** https://gamai-io.github.io/demo/
 
